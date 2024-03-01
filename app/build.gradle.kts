@@ -1,7 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("com.google.devtools.ksp")
+    id("com.google.devtools.ksp") //KSP
+    id("com.google.dagger.hilt.android") //Dagger hilt
 }
 
 android {
@@ -67,4 +68,10 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    // Dagger hilt
+    val di = "2.50"
+    implementation("com.google.dagger:hilt-android:$di")
+    ksp("com.google.dagger:hilt-android-compiler:$di")
+
 }
