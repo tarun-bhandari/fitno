@@ -75,3 +75,5 @@ val dark_background = Color(0xFFAFD36D)
 val dark_onbackground = Color(0xFF243600)
 val dark_backgroundContainer = Color(0xFF364E00)
 val dark_onbackgroundContainer = Color(0xFFCBEF86)
+
+val TRANSPARENT= Color(0x00FFFFFF)
