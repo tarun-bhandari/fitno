@@ -38,4 +38,8 @@ util -> storing the helper class in this package
 - [Compose Navigation](https://developer.android.com/jetpack/compose/navigation)
 - [KSP](https://kotlinlang.org/docs/ksp-overview.html)
 
+[Setup Navigation](./navigation-docs.md)
+
+
+
 
