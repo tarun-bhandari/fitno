@@ -26,15 +26,17 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.tarunbhandari.fitno.R
-import com.tarunbhandari.fitno.ui.theme.FitnoTheme
 import com.tarunbhandari.fitno.util.LogTagHelper
 import com.tarunbhandari.fitno.util.Screen
+import com.tarunbhandari.fitno.util.SharedPreferenceHelper
 
 @Composable
 fun OnBoardingScreen(
-    navController: NavHostController
+    navController: NavHostController,
+    sharedPreferenceHelper: SharedPreferenceHelper
 ) {
     Log.i(LogTagHelper.SCREEN, "User is on OnBoardingScreen")
     Box(
@@ -72,10 +74,9 @@ fun OnBoardingScreen(
             Spacer(modifier = Modifier.padding( vertical = 24.dp))
             Button(
                 onClick = {
-                    Log.i(LogTagHelper.CLICK, "User has click on button")
                     navController.navigate(Screen.Home.route)
-                    Log.i("Navigation","Navigated to Homescreen")
-                          } ,
+                    sharedPreferenceHelper.isFirstTime = false
+                } ,
                 colors = ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
                     contentColor = if(isSystemInDarkTheme()) Color.White else Color.Black
