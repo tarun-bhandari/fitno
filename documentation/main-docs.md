@@ -38,6 +38,39 @@ util -> storing the helper class in this package
 - [Compose Navigation](https://developer.android.com/jetpack/compose/navigation)
 - [KSP](https://kotlinlang.org/docs/ksp-overview.html)
 
+### Setting up
+
+#### edgetoedge and transparency
+
+I have used used the edgetoedge, to use the utilize full size of the screen and set the colors of the 
+status bar transparent for the modern look  
+
+In `theme.xml` add these lines
+```xml
+<item name="android:statusBarColor">@android:color/transparent</item>
+<item name="android:navigationBarColor">@android:color/transparent</item>
+```
+
+In the `Theme.kt` file add these line inside the theme function 
+```kotlin
+if (!view.isInEditMode) {
+    SideEffect {
+        val window = (view.context as Activity).window
+        window.statusBarColor = Color.Transparent.toArgb() // This will make the status bar transparent
+        WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
+    }
+}
+```
+
+Lastly add these line in the MainActivity.kt file before the `setContent()` to acheive the edgetoedge 
+content display and transparency
+```kotlin
+enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT),
+            navigationBarStyle = SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT)
+        )
+```
+
 [Setup Navigation](./navigation-docs.md)
 
 
