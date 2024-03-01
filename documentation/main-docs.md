@@ -33,8 +33,9 @@ util -> storing the helper class in this package
 
 ### Library used
 
-- Room
-- Dagger Hilt
-- Compose Navigation
-- KSP
+- [Room](https://developer.android.com/jetpack/androidx/releases/room)
+- [Dagger Hilt](https://developer.android.com/training/dependency-injection/hilt-android)
+- [Compose Navigation](https://developer.android.com/jetpack/compose/navigation)
+- [KSP](https://kotlinlang.org/docs/ksp-overview.html)
+
 
