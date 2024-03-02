@@ -3,10 +3,13 @@ package com.tarunbhandari.fitno.di
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
+import com.tarunbhandari.fitno.data.AppDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
 import javax.inject.Singleton
 
 @Module
@@ -24,6 +27,15 @@ object AppModule {
     fun provideApplicationContext(application: Application): Context {
         return application.applicationContext
     }
+
+    @Provides
+    fun provideCoroutineScope(): CoroutineScope = CoroutineScope(SupervisorJob())
+
+    @Provides
+    fun provideAppDatabase(context: Context, scope: CoroutineScope): AppDatabase {
+        return AppDatabase.getDatabase(context, scope)
+    }
+
 }
 
 
