@@ -47,8 +47,8 @@ status bar transparent for the modern look
 
 In `theme.xml` add these lines
 ```xml
-<item name="android:statusBarColor">@android:color/transparent</item>
-<item name="android:navigationBarColor">@android:color/transparent</item>
+    <item name="android:statusBarColor">@android:color/transparent</item>
+    <item name="android:navigationBarColor">@android:color/transparent</item>
 ```
 
 In the `Theme.kt` file add these line inside the theme function 
@@ -62,14 +62,17 @@ if (!view.isInEditMode) {
 }
 ```
 
-Lastly add these line in the MainActivity.kt file before the `setContent()` to acheive the edgetoedge 
+Lastly add these line in the MainActivity.kt file before the `setContent()` to achieve the edgetoedge 
 content display and transparency
+
 ```kotlin
 enableEdgeToEdge(
-            statusBarStyle = SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT),
-            navigationBarStyle = SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT)
-        )
+    statusBarStyle = SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT),
+    navigationBarStyle = SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT)
+)
 ```
+
+#### Naivgation 
 
 [Setup Navigation](./navigation-docs.md)
 
