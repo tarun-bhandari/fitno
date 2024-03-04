@@ -72,7 +72,7 @@ enableEdgeToEdge(
 )
 ```
 
-#### Naivgation 
+#### Navigation 
 
 [Setup Navigation](./navigation-docs.md)
 
