@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material3.Button
@@ -17,15 +18,22 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.tarunbhandari.fitno.ui.theme.FitnoTheme
 
 @Composable
@@ -34,6 +42,18 @@ fun LoginScreen() {
     ToDo: A view model for handling the state of the variable and validating the information and saving it to database
     ToDo: And navigate it to the next screen
  */
+
+//    to check if there is an error or not
+    var errorInName by remember { mutableStateOf(false) }
+    var errorInAge by remember { mutableStateOf(false) }
+    var errorInGender by remember { mutableStateOf(false) }
+    var errorInWeight by remember { mutableStateOf(false) }
+
+//    state for the switch
+    var isMaleSelect by remember { mutableStateOf(false) }
+    var isFemaleSelect by remember { mutableStateOf(false) }
+
+    val viewmodel: LoginViewModel = viewModel()
 
     Column(
         verticalArrangement = Arrangement.Top,
@@ -51,16 +71,42 @@ fun LoginScreen() {
         OutlinedTextField(
             value = "",
             onValueChange = {},
+            isError = errorInName,
             label = {
-                Text(text = "Enter your name")
-            }
+                Text(
+                    text = "Enter your name",
+                    fontWeight = FontWeight.Medium
+                )
+            },
+            supportingText = {
+                (if (errorInName) viewmodel.validateNameField() else "*required")?.let {
+                    Text(
+                        text = it
+                    )
+                }
+            },
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Text,
+                imeAction = ImeAction.Next
+            )
         )
         OutlinedTextField(
             value = "",
             onValueChange = {},
             label = {
                 Text(text = "Enter your age")
-            }
+            },
+            supportingText = {
+                (if (errorInAge) viewmodel.validateAgeField() else "*required")?.let {
+                    Text(
+                        text = it
+                    )
+                }
+            },
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Number,
+                imeAction = ImeAction.Next
+            )
         )
         OutlinedTextField(
             value = "",
@@ -86,16 +132,22 @@ fun LoginScreen() {
                 modifier = Modifier.padding(horizontal = 12.dp)
             )
             Switch(
-                checked = false,
-                onCheckedChange = {},
+                checked = isMaleSelect,
+                onCheckedChange = {
+                    isMaleSelect = true
+                    if(isMaleSelect) viewmodel.gender = "Male" else viewmodel.gender = ""
+                },
                 modifier = Modifier.padding(horizontal = 4.dp)
             )
             Text(
                 text = "Female",
                 modifier = Modifier.padding( horizontal = 12.dp))
             Switch(
-                checked = false,
-                onCheckedChange = {},
+                checked = isFemaleSelect,
+                onCheckedChange = {
+                    isFemaleSelect = true
+                    if(isFemaleSelect) viewmodel.gender = "Female" else viewmodel.gender = ""
+                }
             )
         }
         Row(
